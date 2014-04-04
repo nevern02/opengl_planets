@@ -3,14 +3,22 @@
 
 #include <GL/glut.h>
 
+#include "ScreenPt.h"
+
 class Celestial
 {
-  private:
-    void circleMidpoint(GLint xc, GLint yc, GLint radius) const;
-    void circlePlotPoints(GLint xc, GLint yc, ScreenPt circPt) const;
-    void ellipseMidpoint (int xCenter, int yCenter, int Rx, int Ry);
-    void ellipsePlotPoints(int xCenter, int yCenter, int x, int y);
+  public:
+    Celestial(int x, int y, float radiusRelative = 1.0);
+  protected:
+    const GLint x;
+    const GLint y;
+    const GLint radiusRelative;
+    void circleMidpoint(GLint xc, GLint yc, GLint radius);
+    void circlePlotPoints(GLint xc, GLint yc, ScreenPt circPt);
     void setPixel(GLint xPos, GLint yPos);
+  private:
+    static const float EARTH_PIXEL_RADIUS;
+    virtual void draw() = 0;
 };
 
 #endif
