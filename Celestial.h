@@ -2,14 +2,16 @@
 #define __CELESTIAL_H_INCLUDED__
 
 #include <GL/glut.h>
+#include <GL/freeglut.h>
 
 #include "ScreenPt.h"
 
 class Celestial
 {
   public:
-    Celestial(int x, int y, float radiusRelative = 1.0);
+    Celestial(const char* caption, int x, int y, float radiusRelative = 1.0);
   protected:
+    const char* caption;
     const GLint x;
     const GLint y;
     const GLint radiusRelative;

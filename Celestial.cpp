@@ -3,8 +3,8 @@
 // Everything else will be relative size where this == 1.0
 const float Celestial::EARTH_PIXEL_RADIUS = 20;
 
-Celestial::Celestial(int x, int y, float radiusRelative) : 
-  x(x), y(y), radiusRelative(EARTH_PIXEL_RADIUS * radiusRelative)
+Celestial::Celestial(const char* caption, int x, int y, float radiusRelative) : 
+  caption(caption), x(x), y(y), radiusRelative(EARTH_PIXEL_RADIUS * radiusRelative)
 {
   // Subclasses should probably call draw() here
 }

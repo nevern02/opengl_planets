@@ -1,37 +1,44 @@
 #include "Planet.h"
 
 // These == distanceFromSunAU = 1.0
-const int Planet::EARTH_PIXEL_ORBIT_MAJOR_AXIS = 200;
-const int Planet::EARTH_PIXEL_ORBIT_MINOR_AXIS = 100;
+const int Planet::EARTH_PIXEL_ORBIT_MAJOR_AXIS = 350;
+const int Planet::EARTH_PIXEL_ORBIT_MINOR_AXIS = 175;
 
-Planet::Planet(int x, int y, float radiusRelative, float distanceFromSunAU) : 
-  Celestial(x, y, radiusRelative), distanceFromSunAU(distanceFromSunAU)
+Planet::Planet(const char* caption, 
+               int x, 
+               int y, 
+               float radiusRelative, 
+               float distanceFromSunAU) : 
+  Celestial(caption, x, y, radiusRelative), distanceFromSunAU(distanceFromSunAU)
 {
   draw();
 }
 
 void Planet::draw()
 {
-  float majorAxis = distanceFromSunAU * EARTH_PIXEL_ORBIT_MAJOR_AXIS;
-  float minorAxis = distanceFromSunAU * EARTH_PIXEL_ORBIT_MINOR_AXIS;
+  int majorAxis = distanceFromSunAU * EARTH_PIXEL_ORBIT_MAJOR_AXIS;
+  int minorAxis = distanceFromSunAU * EARTH_PIXEL_ORBIT_MINOR_AXIS;
 
   ellipseMidpoint(x, y, majorAxis, minorAxis);
   circleMidpoint(x + majorAxis, y, radiusRelative);
+
+  glRasterPos2i(x + majorAxis, y);
+  glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)caption);
 }
 
-void Planet::ellipseMidpoint(int xCenter, int yCenter, int Rx, int Ry)
+void Planet::ellipseMidpoint(float xCenter, float yCenter, int Rx, int Ry)
 {
-  int Rx2 = Rx * Rx;
-  int Ry2 = Ry * Ry;
-  int twoRx2 = 2 * Rx2;
-  int twoRy2 = 2 * Ry2;
-  int p;
-  int x = 0;
-  int y = Ry;
-  int px = 0;
-  int py = twoRx2 * y;
+  float Rx2 = Rx * Rx;
+  float Ry2 = Ry * Ry;
+  float twoRx2 = 2 * Rx2;
+  float twoRy2 = 2 * Ry2;
+  float p;
+  float x = 0;
+  float y = Ry;
+  float px = 0;
+  float py = twoRx2 * y;
   /* Plot the initial point in each quadrant. */
-  ellipsePlotPoints (xCenter, yCenter, x, y);
+  ellipsePlotPoints(xCenter, yCenter, x, y);
   /* Region 1 */
   p = ceil(Ry2 - (Rx2 * Ry) + (0.25 * Rx2));
   while (px < py) {
@@ -44,7 +51,7 @@ void Planet::ellipseMidpoint(int xCenter, int yCenter, int Rx, int Ry)
       py -= twoRx2;
       p += Ry2 + px - py;
     }
-    ellipsePlotPoints (xCenter, yCenter, x, y);
+    ellipsePlotPoints(xCenter, yCenter, x, y);
   }
 
   /* Region 2 */
@@ -63,7 +70,7 @@ void Planet::ellipseMidpoint(int xCenter, int yCenter, int Rx, int Ry)
   }
 }
 
-void Planet::ellipsePlotPoints(int xCenter, int yCenter, int x, int y)
+void Planet::ellipsePlotPoints(float xCenter, float yCenter, float x, float y)
 {
   setPixel(xCenter + x, yCenter + y);
   setPixel(xCenter - x, yCenter + y);

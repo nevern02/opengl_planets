@@ -5,7 +5,7 @@
 #include "Sun.h"
 
 // Window display size
-GLsizei winWidth = 800, winHeight = 600;   
+GLsizei winWidth = 1280, winHeight = 1024;   
 
 // Initialize method
 void init()
@@ -26,20 +26,28 @@ void displayFcn()
 {
   int xc = winWidth / 2, yc = winHeight / 2;
   float green[3] = {0.0, 0.75, 0.0};
+  float orange[3] = {1.0, 0.6, 0};
   float red[3] = {1.0, 0.0, 0.0};
+  float blue[3] = {0.0, 0.0, 1.0};
 
   // Clear display window.
   glClear(GL_COLOR_BUFFER_BIT);  
 
   glColor3f(1.0, 0.0, 0.0);
 
-  Sun sun(xc, yc, 1.5);
+  Sun sun("Sun", xc, yc, 3.0);
 
   glColor3fv(green);
-  Planet earth(xc, yc, 1.0, 1.0);
+  Planet earth("Earth", xc, yc, 1.0, 1.0);
+
+  glColor3fv(orange);
+  Planet mercury("Mercury", xc, yc, 0.382, 0.387);
+
+  glColor3fv(blue);
+  Planet venus("Venus", xc, yc, 0.949, 0.723);
 
   glColor3fv(red);
-  Planet mercury(xc, yc, 1.0, 0.387);
+  Planet mars("Mars", xc, yc, 0.532, 1.524);
 
 
   glFlush( );
