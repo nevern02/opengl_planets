@@ -71,7 +71,7 @@ int main(int argc, char** argv)
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(winWidth, winHeight);
 
-    glutCreateWindow("Rice Homework 3 - Planets");
+    glutCreateWindow("Planets");
     init();
     glutDisplayFunc(displayFcn);
 
