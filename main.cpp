@@ -41,13 +41,13 @@ void displayFcn()
   Planet earth("Earth", xc, yc, 1.0, 1.0);
 
   glColor3fv(orange);
-  Planet mercury("Mercury", xc, yc, 0.382, 0.387);
+  Planet mercury("Mercury", xc, yc, 0.382, 0.39);
 
   glColor3fv(blue);
-  Planet venus("Venus", xc, yc, 0.949, 0.723);
+  Planet venus("Venus", xc, yc, 0.949, 0.72);
 
   glColor3fv(red);
-  Planet mars("Mars", xc, yc, 0.532, 1.524);
+  Planet mars("Mars", xc, yc, 0.532, 1.52);
 
 
   glFlush( );
